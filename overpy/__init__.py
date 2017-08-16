@@ -30,8 +30,9 @@ GLOBAL_ATTRIBUTE_MODIFIERS = {
 }
 
 if PY2:
-    from urllib2 import urlopen
-    from urllib2 import HTTPError
+    # from urllib2 import urlopen
+    # from urllib2 import HTTPError
+    from urllib2 import *
 elif PY3:
     from urllib.request import urlopen
     from urllib.error import HTTPError
@@ -61,7 +62,7 @@ class Overpass(object):
     default_retry_timeout = 1.0
     default_url = "http://overpass-api.de/api/interpreter"
 
-    def __init__(self, read_chunk_size=None, url=None, xml_parser=XML_PARSER_SAX, max_retry_count=None, retry_timeout=None):
+    def __init__(self, read_chunk_size=None, url=None, xml_parser=XML_PARSER_SAX, max_retry_count=None, retry_timeout=None, proxies=None):
         """
         :param read_chunk_size: Max size of each chunk read from the server response
         :type read_chunk_size: Integer
@@ -93,6 +94,10 @@ class Overpass(object):
         self.retry_timeout = retry_timeout
 
         self.xml_parser = xml_parser
+
+        if proxies is not None:
+            self.proxies = proxies
+
 
     def _handle_remark_msg(self, msg):
         """
@@ -129,6 +134,11 @@ class Overpass(object):
                 time.sleep(self.retry_timeout)
             retry_num += 1
             try:
+                if self.proxies is not None:
+                    proxy = ProxyHandler(self.proxies)
+                    opener = build_opener(proxy)
+                    install_opener(opener)
+                
                 f = urlopen(self.url, query)
             except HTTPError as e:
                 f = e
