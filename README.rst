@@ -5,20 +5,6 @@ A Python Wrapper to access the Overpass API.
 
 Have a look at the `documentation`_ to find additional information.
 
-.. image:: https://pypip.in/version/overpy/badge.svg
-    :target: https://pypi.python.org/pypi/overpy/
-    :alt: Latest Version
-
-.. image:: https://pypip.in/license/overpy/badge.svg
-    :target: https://pypi.python.org/pypi/overpy/
-    :alt: License
-
-.. image:: https://travis-ci.org/DinoTools/python-overpy.svg?branch=master
-    :target: https://travis-ci.org/DinoTools/python-overpy
-
-.. image:: https://coveralls.io/repos/DinoTools/python-overpy/badge.png?branch=master
-    :target: https://coveralls.io/r/DinoTools/python-overpy?branch=master
-
 Features
 --------
 
