@@ -26,6 +26,8 @@ Features
 * Parse JSON and XML response data
 * Additional helper functions
 
+same as overpy plus proxy support for python 2 ( urlib2 )
+
 Install
 -------
 
@@ -40,8 +42,9 @@ Supported Python versions:
 **Install:**
 
 .. code-block:: console
-
-    $ pip install overpy
+    $ git clone https://github.com/HichamZouarhi/python-overpy.git
+    $ cd python-overpy
+    $ pip install .
 
 Examples
 --------
@@ -52,7 +55,7 @@ Additional examples can be found in the `documentation`_ and in the *examples* d
 
     import overpy
 
-    api = overpy.Overpass()
+    api = overpy.Overpass(proxies = {'http': 'your_proxy_ip:your_proxy_port')
 
     # fetch all ways and nodes
     result = api.query("""
@@ -68,28 +71,6 @@ Additional examples can be found in the `documentation`_ and in the *examples* d
         for node in way.nodes:
             print("    Lat: %f, Lon: %f" % (node.lat, node.lon))
 
-
-Helper
-~~~~~~
-
-Helper methods are available to provide easy access to often used requests.
-
-.. code-block:: python
-
-    import overpy.helper
-
-    # 3600062594 is the OSM id of Chemnitz and is the bounding box for the request
-    street = overpy.helper.get_street(
-        "Straße der Nationen",
-        "3600062594"
-    )
-
-    # this finds an intersection between Straße der Nationen and Carolastraße in Chemnitz
-    intersection = overpy.helper.get_intersection(
-        "Straße der Nationen",
-        "Carolastraße",
-        "3600062594"
-    )
 
 
 License
